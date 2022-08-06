@@ -6,6 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
+
+    <style>
+        .user-style-dy {
+            background-color: lightsalmon;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px gray;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,7 +27,7 @@
     <script>
         fetch("https://jsonplaceholder.typicode.com/users")
             .then(res => res.json())
-            .then(data => showUserNames(data))
+            .then(data => showUserNames(data));
 
         function showUserNames(data) {
             /* let lists = '';
@@ -28,24 +38,25 @@
             ul.innerHTML = lists; */
 
             //others way to generate HTML dynamically
-            let userHTML = "";
+            let usersHTML = "";
             data.forEach(user => {
-                userHTML = userHTML +
+                usersHTML = usersHTML +
                     `
-                    <div id="user-style-dy">
-                        <h2>${user.name}</h2>
-                            <p>
-                                ${user.phone}.
-                                    <br> 
-                                ${user.email}.
-                                    <br> 
-                                ${user.company.name}.
-                            </p>
-                    <div/>
-                `
+                        <div class="user-style-dy">
+                            <h2>${user.name}</h2>
+                            <p>Email: ${user.email}</p>
+                                <p>
+                                    ${user.name}
+                                        <br>
+                                    ${user.company.catchPhrase}
+                                        <br>
+                                    ${user.company.bs}
+                                </p>
+                        </div>
+                    `
             });
             const userContainer = document.getElementById('user-container');
-            userContainer.innerHTML = userHTML;
+            userContainer.innerHTML = usersHTML;
         }
     </script>
 </body>
