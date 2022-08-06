@@ -9,22 +9,44 @@
 </head>
 
 <body>
-    <ul id="user-list">
-    </ul>
+    <!-- <ul id="user-list"></ul> -->
+
+    <!-- others way to generate HTML dynamically -->
+    <div id="user-container"></div>
 
     <script>
         fetch("https://jsonplaceholder.typicode.com/users")
             .then(res => res.json())
             .then(data => showUserNames(data))
 
-            function showUserNames(data) {
-                let lists = '';
-                data.forEach(user => {
-                    lists = lists + `<li>${user.name}</li>`
-                });
-                const ul = document.getElementById('user-list');
-                ul.innerHTML = lists;
-            }
+        function showUserNames(data) {
+            /* let lists = '';
+            data.forEach(user => {
+                lists = lists + `<li>${user.name}</li>`
+            });
+            const ul = document.getElementById('user-list');
+            ul.innerHTML = lists; */
+
+            //others way to generate HTML dynamically
+            let userHTML = "";
+            data.forEach(user => {
+                userHTML = userHTML +
+                    `
+                    <div id="user-style-dy">
+                        <h2>${user.name}</h2>
+                            <p>
+                                ${user.phone}.
+                                    <br> 
+                                ${user.email}.
+                                    <br> 
+                                ${user.company.name}.
+                            </p>
+                    <div/>
+                `
+            });
+            const userContainer = document.getElementById('user-container');
+            userContainer.innerHTML = userHTML;
+        }
     </script>
 </body>
 
